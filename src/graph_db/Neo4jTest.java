@@ -14,9 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Neo4jTest {
-	
 	GraphDatabaseService db;
-
 	private static enum NodeLabels implements Label
 	{
 		Person,
