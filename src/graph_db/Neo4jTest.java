@@ -19,7 +19,7 @@ public class Neo4jTest {
 	{
 		Person,
 		Company,
-		Project;
+		Technology;
 	}
 	
 	public static void main(String[] args) {
@@ -74,7 +74,7 @@ public class Neo4jTest {
 				try (Transaction tx = db.beginTx())
 				{					
 					Node newNode = db.createNode();
-					newNode.addLabel(NodeLabels.Project);
+					newNode.addLabel(NodeLabels.Technology);
 					newNode.setProperty("Project", project.get(0));
 					newNode.setProperty("Employee", project.get(1));
 					newNode.setProperty("Company", project.get(2));
@@ -168,8 +168,8 @@ public class Neo4jTest {
 	{
 		String queryWorksFor = "match (p:Person), (c:Company) where p.Company = c.Name create (p) - [r:WORKS_FOR] -> (c) return r";
 		String queryWorksWith = "match (p1:Person), (p2:Person) where p1.Company = p2.Company and p1 <> p2 create (p1) - [r:WORKS_WITH] -> (p2) return r";
-		String queryBelongsTo = "match (proj: Project), (c:Company) where proj.Company = c.Name create (proj) - [r:BELONGS_TO] -> (c) return r";
-		String queryWorksOn = "match (p:Person), (proj:Project) where p.Name = proj.Employee create (p) - [r:WORKED_ON] -> (proj) return r";
+		String queryBelongsTo = "match (t: Technology), (c:Company) where t.Company = c.Name create (t) - [r:BELONGS_TO] -> (c) return r";
+		String queryWorksOn = "match (p:Person), (t:Technology) where p.Name = t.Employee create (p) - [r:WORKED_ON] -> (t) return r";
 		try (Transaction tx = db.beginTx()){
 			Result result = db.execute(queryWorksFor);
 			tx.success();
