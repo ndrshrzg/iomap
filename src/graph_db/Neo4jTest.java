@@ -6,11 +6,8 @@ import org.neo4j.io.fs.FileUtils;
 
 import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Neo4jTest {
@@ -171,18 +168,22 @@ public class Neo4jTest {
 		String queryBelongsTo = "match (t: Technology), (c:Company) where t.Company = c.Name create (t) - [r:BELONGS_TO] -> (c) return r";
 		String queryWorksOn = "match (p:Person), (t:Technology) where p.Name = t.Employee create (p) - [r:WORKED_ON] -> (t) return r";
 		try (Transaction tx = db.beginTx()){
+			@SuppressWarnings("unused")
 			Result result = db.execute(queryWorksFor);
 			tx.success();
 		}
 		try (Transaction tx = db.beginTx()){
+			@SuppressWarnings("unused")
 			Result result = db.execute(queryWorksWith);
 			tx.success();
 		}
 		try (Transaction tx = db.beginTx()){
+			@SuppressWarnings("unused")
 			Result result = db.execute(queryBelongsTo);
 			tx.success();
 		}
 		try (Transaction tx = db.beginTx()){
+			@SuppressWarnings("unused")
 			Result result = db.execute(queryWorksOn);
 			tx.success();
 		}
