@@ -163,7 +163,7 @@ public class Neo4jTest {
 	
 	private static void createRelationships(GraphDatabaseService db)
 	{
-		String queryWorksFor = "match (p:Person), (c:Company) where p.Company = c.Name create (p) - [r:WORKS_FOR] -> (c) return r";
+		String queryWorksFor = "match (p:Person), (c:Company) where p.Company = c.Name create (p) - [r:WORKS_FOR { years: p.Years}] -> (c) return r";
 		String queryWorksWith = "match (p1:Person), (p2:Person) where p1.Company = p2.Company and p1 <> p2 create (p1) - [r:WORKS_WITH] -> (p2) return r";
 		String queryBelongsTo = "match (t: Technology), (c:Company) where t.Company = c.Name create (t) - [r:BELONGS_TO] -> (c) return r";
 		String queryWorksOn = "match (p:Person), (t:Technology) where p.Name = t.Employee create (p) - [r:WORKED_ON] -> (t) return r";
